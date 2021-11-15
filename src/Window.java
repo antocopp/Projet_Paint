@@ -162,6 +162,9 @@ public class Window extends JFrame implements ActionListener{
                                 Drawing.setLastNF(Drawing.getNameFigure());
                                 Drawing.setNameFigure("Remplir");
                                 break;
+                        case "Crayon" :
+                                Drawing.setNameFigure("Crayon");
+                                break;
                         case "New" :
 
                                 break;

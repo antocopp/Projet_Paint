@@ -85,7 +85,8 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
                 listF.add(squ);
                 break;
             case "Crayon":
-
+                Pen pen = new Pen(color,pt1,0);
+                listF.add(pen);
                 break;
             }
     }
@@ -102,6 +103,10 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e) {
         Point pt = new Point(e.getX(),e.getY());
+        if (nameFigure=="Crayon"){
+            Pen pen = new Pen(color,pt,0);
+            listF.add(pen);
+        }
         int w = pt.getX()-listF.get(listF.size()-1).getPoint().getX();
         int h = pt.getY()-listF.get(listF.size()-1).getPoint().getY();
         listF.get(listF.size()-1).setBoundingBox(h,w);
