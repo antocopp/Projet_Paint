@@ -23,10 +23,10 @@ public class Ellipse extends Figure {
     public int getSurface(){return 1;}
     public void setBoundingBox(int heightBB, int widthBB) {
         if (widthBB<0){
-            this.getPoint().setX(this.getPoint().getX()+widthBB);
+            this.getPoint().setX(Drawing.getListP().get(Drawing.getListP().size()-1).getX()+widthBB);
         }
         if (heightBB<0){
-            this.getPoint().setY(this.getPoint().getY()+heightBB);
+            this.getPoint().setY(Drawing.getListP().get(Drawing.getListP().size()-1).getY()+heightBB);
         }
         this.setSemiAxysX(Math.abs(widthBB));
         this.setSemiAxysY(Math.abs(heightBB));

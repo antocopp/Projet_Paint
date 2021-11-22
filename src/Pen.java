@@ -3,7 +3,6 @@ import java.awt.*;
 public class Pen extends Figure{
     public Pen(Color c, Point p, int remp){
         super(c, p,remp);
-
     }
 
 
@@ -14,6 +13,9 @@ public class Pen extends Figure{
 
     public void draw(Graphics g) {
         g.setColor(getColor());
-        g.drawLine(p.getX(),p.getY(),p.getX(),p.getY());
+        if (remp==0){
+            g.fillOval(p.getX()-1,p.getY()-1,3,3);}
+        if (remp==1){
+            g.fillOval(p.getX()-3,p.getY()-3,7,7);}
     }
 }

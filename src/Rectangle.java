@@ -20,14 +20,14 @@ public class Rectangle extends Figure {
     public int getPerimeter(){return (length+width)*2;}
     public int getSurface(){return length*width;}
     public void setBoundingBox(int heightBB, int widthBB){
-        this.setLength(Math.abs(widthBB));
-        this.setWidth(Math.abs(heightBB));
         if (widthBB<0){
-            this.getPoint().setX(this.getPoint().getX()+widthBB);
+            this.getPoint().setX(Drawing.getListP().get(Drawing.getListP().size()-1).getX()+widthBB);
         }
         if (heightBB<0){
-            this.getPoint().setY(this.getPoint().getY()+heightBB);
+            this.getPoint().setY(Drawing.getListP().get(Drawing.getListP().size()-1).getY()+heightBB);
         }
+        this.setLength(Math.abs(widthBB));
+        this.setWidth(Math.abs(heightBB));
     }
 
     public void draw(Graphics g) {

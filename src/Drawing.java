@@ -1,17 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.awt.event.*;
 
 
-public class Drawing extends JPanel implements MouseListener,MouseMotionListener{
+public class Drawing extends JPanel implements MouseListener,MouseMotionListener {
 
     private static Color color;
     private static String nameFigure;
     private static String lastNF;
-    private ArrayList<Figure> listF;
+    private static ArrayList<Figure> listF;
+    private static ArrayList<Point> listP;
 
     public static void setC(Color c) {
         color = c;
@@ -25,10 +25,15 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
         addMouseMotionListener(this);
         this.setBackground(Color.white);
         this.listF=new ArrayList<>();
+        this.listP=new ArrayList<>();
     }
 
-    public ArrayList<Figure> getListF() {
+    public static ArrayList<Figure> getListF() {
         return listF;
+    }
+
+    public static ArrayList<Point> getListP() {
+        return listP;
     }
 
     public void save(){
@@ -47,11 +52,32 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
         }
     }
 
+    public void recall(){
+        listF.clear();
+        listP.clear();
+        try{
+            FileInputStream fis = new FileInputStream("saveDessin");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            ois.close();
+        }
+        catch (Exception e){
+            System.out.println("Erreur");
+        }
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (nameFigure=="Remplir"){
             listF.get(listF.size()-1).setRemp(1);
+            setNameFigure(lastNF);
+        }
+        if (nameFigure=="Save"){
+            save();
+            setNameFigure(lastNF);
+        }
+        if (nameFigure=="Open"){
+            recall();
             setNameFigure(lastNF);
         }
         for (int i = 0; i < listF.size(); i++) {
@@ -66,6 +92,8 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
     @Override
     public void mousePressed(MouseEvent e) {
         Point pt1 = new Point(e.getX(),e.getY());
+        Point pt0 = new Point(e.getX(),e.getY());
+        listP.add(pt0);
         String fig = nameFigure;
         switch (fig){
             case "Cercle":
@@ -84,9 +112,13 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
                 Square squ = new Square(color, pt1,0,0);
                 listF.add(squ);
                 break;
-            case "Crayon":
+            case "Petit":
                 Pen pen = new Pen(color,pt1,0);
                 listF.add(pen);
+                break;
+            case "Grand":
+                Pen gpen = new Pen(color,pt1,0);
+                listF.add(gpen);
                 break;
             }
     }
@@ -103,12 +135,16 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e) {
         Point pt = new Point(e.getX(),e.getY());
-        if (nameFigure=="Crayon"){
+        if (nameFigure=="Petit"){
             Pen pen = new Pen(color,pt,0);
             listF.add(pen);
         }
-        int w = pt.getX()-listF.get(listF.size()-1).getPoint().getX();
-        int h = pt.getY()-listF.get(listF.size()-1).getPoint().getY();
+        if (nameFigure=="Grand"){
+            Pen pen = new Pen(color,pt,1);
+            listF.add(pen);
+        }
+        int w = pt.getX()-listP.get(listP.size()-1).getX();
+        int h = pt.getY()-listP.get(listP.size()-1).getY();
         listF.get(listF.size()-1).setBoundingBox(h,w);
     }
 

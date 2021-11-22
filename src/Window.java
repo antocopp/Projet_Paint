@@ -36,6 +36,8 @@ public class Window extends JFrame implements ActionListener{
                 c.setLayout(new GridLayout(2,5));
                 JPanel f = new JPanel();
                 f.setLayout(new GridLayout(2,3));
+                JPanel cr=new JPanel();
+                cr.setLayout(new GridLayout(1,2));
 
                 JButton noir = new JButton("Noir");
                 noir.setBackground(Color.BLACK);
@@ -82,9 +84,12 @@ public class Window extends JFrame implements ActionListener{
                 JButton carre = new JButton("Carré");
                 carre.setBackground(Color.WHITE);
                 carre.addActionListener(this);
-                JButton crayon = new JButton("Crayon");
-                crayon.setBackground(Color.LIGHT_GRAY);
-                crayon.addActionListener(this);
+                JButton petit = new JButton("Fin");
+                petit.setBackground(Color.LIGHT_GRAY);
+                petit.addActionListener(this);
+                JButton grand = new JButton("Large");
+                grand.setBackground(Color.LIGHT_GRAY);
+                grand.addActionListener(this);
                 JButton fill = new JButton("Remplir");
                 fill.setBackground(Color.LIGHT_GRAY);
                 fill.addActionListener(this);
@@ -101,7 +106,9 @@ public class Window extends JFrame implements ActionListener{
                 c.add(rose);
                 c.add(magenta);
                 c.add(rouge);
-                f.add(crayon);
+                f.add(cr);
+                cr.add(petit);
+                cr.add(grand);
                 f.add(rectangle);
                 f.add(carre);
                 f.add(fill);
@@ -120,7 +127,7 @@ public class Window extends JFrame implements ActionListener{
                                 Drawing.setC(Color.BLACK);
                                 break;
                         case "Gris" :
-                                Drawing.setC(Color.GRAY);
+                                Drawing.setC(Color.LIGHT_GRAY);
                                 break;
                         case "Rouge" :
                                 Drawing.setC(Color.RED);
@@ -162,21 +169,27 @@ public class Window extends JFrame implements ActionListener{
                                 Drawing.setLastNF(Drawing.getNameFigure());
                                 Drawing.setNameFigure("Remplir");
                                 break;
-                        case "Crayon" :
-                                Drawing.setNameFigure("Crayon");
+                        case "Fin" :
+                                Drawing.setNameFigure("Petit");
+                                break;
+                        case "Large" :
+                                Drawing.setNameFigure("Grand");
                                 break;
                         case "New" :
-
+                                Drawing.getListF().clear();
                                 break;
                         case "Open" :
-
+                                Drawing.setLastNF(Drawing.getNameFigure());
+                                Drawing.setNameFigure("Open");
                                 break;
                         case "Save" :
-
+                                Drawing.setLastNF(Drawing.getNameFigure());
+                                Drawing.setNameFigure("Save");
                                 break;
                         case "Quit" :
                                 this.dispose();
                                 break;
+
                 }
         }
 

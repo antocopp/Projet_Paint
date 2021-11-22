@@ -10,10 +10,10 @@ public class Circle extends Ellipse {
     public void setBoundingBox(int heightBB, int widthBB) {
         int cote = Math.min(Math.abs(heightBB),Math.abs(widthBB));
         if (widthBB<0){
-            this.getPoint().setX(this.getPoint().getX()-cote);
+            this.getPoint().setX(Drawing.getListP().get(Drawing.getListP().size()-1).getX()-cote);
         }
         if (heightBB<0){
-            this.getPoint().setY(this.getPoint().getY()-cote);
+            this.getPoint().setY(Drawing.getListP().get(Drawing.getListP().size()-1).getY()-cote);
         }
         this.setSemiAxysX(cote);
         this.setSemiAxysY(cote);
