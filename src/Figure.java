@@ -7,20 +7,29 @@ public abstract class Figure implements Serializable {
     public Point p;
     public int remp;
 
+    /*****Constructor*****/
+
     public Figure(java.awt.Color c, Point p, int r){
         this.c=c;
         this.p=p;
         this.remp=r;
     }
 
+    /*****Getter*****/
+
     public Point getPoint(){return this.p;}
     public Color getColor(){return this.c;}
-    public abstract int getPerimeter();
-    public abstract int getSurface();
-    public abstract void setRemp(int r);
 
+    /*****Setter*****/
+
+    public abstract void setRemp(int r);
     public abstract void setBoundingBox(int heightBB, int widthBB);
+
+    /*****Methode draw*****/
+
     public abstract void draw(Graphics g);
+
+    /*****Override*****/
 
     @Override
     public String toString() {

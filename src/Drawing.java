@@ -13,12 +13,7 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
     private static ArrayList<Figure> listF;
     private static ArrayList<Point> listP;
 
-    public static void setC(Color c) {
-        color = c;
-    }
-    public static void setNameFigure(String nF) {nameFigure = nF;}
-    public static void setLastNF(String lNF){lastNF=lNF;}
-    public static String getNameFigure(){return nameFigure;}
+    /*****Constructor*****/
 
     public Drawing() {
         addMouseListener(this);
@@ -28,13 +23,26 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
         this.listP=new ArrayList<>();
     }
 
+    /*****Getter*****/
+
+    public static String getNameFigure(){return nameFigure;}
     public static ArrayList<Figure> getListF() {
         return listF;
     }
-
     public static ArrayList<Point> getListP() {
         return listP;
     }
+
+    /*****Setter*****/
+
+    public static void setC(Color c) {
+        color = c;
+    }
+    public static void setNameFigure(String nF) {nameFigure = nF;}
+    public static void setLastNF(String lNF){lastNF=lNF;}
+
+    /*****Methode save et recall*****/
+    /* Ces fonctions ne fonctionnent pas */
 
     public void save(){
         try{
@@ -65,6 +73,10 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
             System.out.println("Erreur");
         }
     }
+
+    /*****Override*****/
+
+    /* paintComponent permet de dessiner les figures de la liste */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -89,6 +101,7 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
     @Override
     public void mouseClicked(MouseEvent e) {}
 
+    /* mousepressed permet de creer une nouvelle figure a chaque fois qu'on clique sur le drawing */
     @Override
     public void mousePressed(MouseEvent e) {
         Point pt1 = new Point(e.getX(),e.getY());
@@ -123,15 +136,7 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
             }
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
-
+    /* mousedragged permet de tracer la figure en temps réel tant que le clic est enfoncé */
     @Override
     public void mouseDragged(MouseEvent e) {
         Point pt = new Point(e.getX(),e.getY());
@@ -148,6 +153,12 @@ public class Drawing extends JPanel implements MouseListener,MouseMotionListener
         listF.get(listF.size()-1).setBoundingBox(h,w);
     }
 
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
     @Override
     public void mouseMoved(MouseEvent e) {}
 

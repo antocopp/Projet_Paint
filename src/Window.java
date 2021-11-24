@@ -4,14 +4,17 @@ import java.awt.event.*;
 
 public class Window extends JFrame implements ActionListener{
 
+        /*****Constructor*****/
+        /* On créé la fenêtre et on y place toute l'interface visuel (bouttons, menu etc) */
 
         public Window(String Title, int x, int y) {
                 super(Title);
                 this.setSize(x, y);
                 this.setVisible(true);
                 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
                 Container contentPanel = this.getContentPane();
+
+                /*****Menu file*****/
 
                 JMenuBar m = new JMenuBar();
                 JMenu menu1 = new JMenu("File");
@@ -30,6 +33,8 @@ public class Window extends JFrame implements ActionListener{
                 m.add(menu1);
                 contentPanel.add(m, BorderLayout.NORTH);
 
+                /*****Tableau des boutons*****/
+
                 JPanel s = new JPanel();
                 s.setLayout(new GridLayout(1,2));
                 JPanel c = new JPanel();
@@ -38,6 +43,8 @@ public class Window extends JFrame implements ActionListener{
                 f.setLayout(new GridLayout(2,3));
                 JPanel cr=new JPanel();
                 cr.setLayout(new GridLayout(1,2));
+
+                /*****Boutons*****/
 
                 JButton noir = new JButton("Noir");
                 noir.setBackground(Color.BLACK);
@@ -94,6 +101,8 @@ public class Window extends JFrame implements ActionListener{
                 fill.setBackground(Color.LIGHT_GRAY);
                 fill.addActionListener(this);
 
+                /*****Ajout des boutons au tableau*****/
+
                 s.add(c);
                 s.add(f);
                 c.add(noir);
@@ -117,6 +126,8 @@ public class Window extends JFrame implements ActionListener{
                 contentPanel.add(s,BorderLayout.SOUTH);
 
         }
+
+        /*****Méthode pour savoir sur quel bouton on clique*****/
 
         public void actionPerformed(ActionEvent e)
         {
@@ -166,6 +177,7 @@ public class Window extends JFrame implements ActionListener{
                                 Drawing.setNameFigure("Ellipse");
                                 break;
                         case "Remplir" :
+                                /* On fait une sauvegarde de la figure d'avant pour retracer une figure après la fonction remplir*/
                                 Drawing.setLastNF(Drawing.getNameFigure());
                                 Drawing.setNameFigure("Remplir");
                                 break;
@@ -193,12 +205,12 @@ public class Window extends JFrame implements ActionListener{
                 }
         }
 
-        public static void main (String[] args){
+        /*****Main*****/
 
+        public static void main (String[] args){
                 Window win = new Window("Paint",1000,600);
                 Drawing dr = new Drawing();
                 win.add(dr);
                 win.setVisible(true);
-
         }
 }
